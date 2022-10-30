@@ -44,3 +44,25 @@ await context.SaveChangesAsync();
 //});
 
 //await context.Database.ExecuteSqlInterpolatedAsync($"delete from events where title = {"''; drop table events;"}");
+
+@event = new Event("Ted Heeran concert");
+var ticket = new Ticket(@event, "Dora the Destroyer");
+@event.Tickets.Add(ticket);
+
+context.Events.Add(@event);
+
+await context.SaveChangesAsync();
+
+Console.WriteLine($"EventId: {@event.Id}");
+
+ticket.Client = "Dora the Explorer";
+
+await context.SaveChangesAsync();
+
+await context.DisposeAsync();
+context = new BookingsContext(optionsBuilder.Options);
+readEvent = await context.Events.Where(it => it.Id == @event.Id)
+    .Include(it => it.Tickets)
+    .FirstAsync();
+Console.WriteLine(readEvent.Id);
+Console.WriteLine(readEvent.Tickets.Count);
