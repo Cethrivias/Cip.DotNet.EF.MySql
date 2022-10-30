@@ -4,7 +4,6 @@ public class Event
 {
     public Event()
     {
-        
     }
 
     public Event(string title)
@@ -16,4 +15,6 @@ public class Event
     public string Title { get; set; }
     public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
     public DateTimeOffset UpdatedAt { get; set; } = DateTimeOffset.UtcNow;
+
+    public List<Ticket> Tickets { get; set; } = new();
 }

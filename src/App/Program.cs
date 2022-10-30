@@ -43,4 +43,4 @@ await context.SaveChangesAsync();
 //    context.Events.FirstAsync(it => it.Id == @event.Id),
 //});
 
-await context.Database.ExecuteSqlInterpolatedAsync($"delete from events where title = {"''; drop table events;"}");
+//await context.Database.ExecuteSqlInterpolatedAsync($"delete from events where title = {"''; drop table events;"}");
