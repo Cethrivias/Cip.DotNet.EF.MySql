@@ -1,23 +1,16 @@
-namespace App.Domain.Models;
+﻿using System;
+using System.Collections.Generic;
 
-public class Ticket
+namespace App.Domain.Models
 {
-    public Ticket()
+    public partial class Ticket
     {
+        public Guid Id { get; set; }
+        public string Client { get; set; } = null!;
+        public int EventId { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
+
+        public virtual Event Event { get; set; } = null!;
     }
-
-    public Ticket(Event @event, string client)
-    {
-        EventId = @event.Id;
-        Event = @event;
-        Client = client;
-    }
-
-    public Guid Id { get; set; } = Guid.NewGuid();
-    public string Client { get; set; }
-    public int EventId { get; set; }
-    public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
-    public DateTimeOffset UpdatedAt { get; set; } = DateTimeOffset.UtcNow;
-
-    public Event Event { get; set; }
 }

@@ -46,7 +46,12 @@ await context.SaveChangesAsync();
 //await context.Database.ExecuteSqlInterpolatedAsync($"delete from events where title = {"''; drop table events;"}");
 
 @event = new Event("Ted Heeran concert");
-var ticket = new Ticket(@event, "Dora the Destroyer");
+var ticket = new Ticket()
+{
+    Client = "Dora the Destroyer",
+    Event = @event,
+    EventId = @event.Id
+};
 @event.Tickets.Add(ticket);
 
 context.Events.Add(@event);

@@ -1,20 +1,26 @@
-namespace App.Domain.Models;
+﻿using System;
+using System.Collections.Generic;
 
-public class Event
+namespace App.Domain.Models
 {
-    public Event()
+    public partial class Event
     {
+        public Event()
+        {
+            Tickets = new HashSet<Ticket>();
+        }
+
+        public Event(string title)
+        {
+            Title = title;
+            Tickets = new HashSet<Ticket>();
+        }
+
+        public int Id { get; set; }
+        public string Title { get; set; } = null!;
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
+
+        public virtual ICollection<Ticket> Tickets { get; set; }
     }
-
-    public Event(string title)
-    {
-        Title = title;
-    }
-
-    public int Id { get; set; }
-    public string Title { get; set; }
-    public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
-    public DateTimeOffset UpdatedAt { get; set; } = DateTimeOffset.UtcNow;
-
-    public List<Ticket> Tickets { get; set; } = new();
 }
