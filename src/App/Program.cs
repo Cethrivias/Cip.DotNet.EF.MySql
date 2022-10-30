@@ -15,3 +15,32 @@ var context = new BookingsContext(optionsBuilder.Options);
 var @event = new Event("Ted Heeran Concert");
 context.Events.Add(@event);
 await context.SaveChangesAsync();
+
+// Read
+var readEvent = await context.Events.FindAsync(@event.Id);
+Console.WriteLine(readEvent == @event);
+
+// Update
+readEvent.Title = "Taylor Slow Conecert";
+await context.SaveChangesAsync();
+
+// Delete
+context.Remove(readEvent);
+await context.SaveChangesAsync();
+
+//a sync
+//var eventsQuery = await context.Events.Where(e => e.Title.Contains("Concert")).ToListAsync();
+//context.Events.RemoveRange(eventsQuery);
+
+//await Task.WhenAll(new []
+//{
+//    context.Events.FirstAsync(it => it.Id == @event.Id),
+//    context.Events.FirstAsync(it => it.Id == @event.Id),
+//    context.Events.FirstAsync(it => it.Id == @event.Id),
+//    context.Events.FirstAsync(it => it.Id == @event.Id),
+//    context.Events.FirstAsync(it => it.Id == @event.Id),
+//    context.Events.FirstAsync(it => it.Id == @event.Id),
+//    context.Events.FirstAsync(it => it.Id == @event.Id),
+//});
+
+await context.Database.ExecuteSqlInterpolatedAsync($"delete from events where title = {"''; drop table events;"}");
